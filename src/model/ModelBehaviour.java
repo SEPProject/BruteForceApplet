@@ -13,11 +13,17 @@ public interface ModelBehaviour {
      */
     public void setController(Controller c);
 
+   /**
+    * return the worst list of password
+    * @return
+    */
+    public File getWorstList();
     /**
-     * return the worst password file
+     * return the password File where the hash is stored
      * @return
      */
-    public File getFile();
+    public File getPasswordFile();
+    
 
     /**
      * return the password manager of the model

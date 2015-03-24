@@ -14,4 +14,9 @@ public interface Controller2View {
      * @return
      */
     public View getView();
+    
+    /**
+     * initialise the password file + model to start mission1
+     */
+    public void initMission1();
 }

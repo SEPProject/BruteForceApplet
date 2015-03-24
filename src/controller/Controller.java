@@ -13,11 +13,10 @@ public class Controller implements Controller2Model, Controller2View {
     private Model model ;
     private View view;
 
-    public Controller(Model m ,View v){
-        this.model = m;
+    public Controller(View v){
+        Model mod = new Model();
+        this.model=mod;     
         this.view = v;
-        model.setController(this);
-        view.setController(this);
     }
 
     @Override
@@ -39,18 +38,6 @@ public class Controller implements Controller2Model, Controller2View {
     public View getView(){
         return view;
     }
-
-
-    /**
-     * set the description of the applet
-     */
-    public void setAppletDescription(){
-        model.setDescription("Through this applet, you will discover" +
-                " how \"Brute force\" attacks are performed by Hackers. You" +
-                " will also see how you can have a good password.");
-        view.setAppletDescriptionText(getModel().getDescription());
-    }
-
 
     /**
      * set the mission description + parts
@@ -76,7 +63,10 @@ public class Controller implements Controller2Model, Controller2View {
 
     }*/
 
-
+    @Override
+    public void initMission1(){
+       // model.getFile();
+    }
 
 
 
@@ -109,7 +99,7 @@ public class Controller implements Controller2Model, Controller2View {
 
         try{
 
-            fr = new FileReader(model.getFile());
+            fr = new FileReader(model.getWorstList());
             br = new BufferedReader(fr);
 
             System.out.println(">> Attack starting... ");

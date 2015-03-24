@@ -3,3 +3,5 @@ manifest.mf
 nbproject/*
 logs/*
 !.gitkeep
+/build/
+/dist/

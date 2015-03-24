@@ -21,12 +21,6 @@ public interface ViewBehaviour {
     public Controller getController();
 
     /**
-     * return the first page : description of the applet and starting one
-     * @return
-     */
-    public JFrame getFirstPage();
-
-    /**
      * set the applet description on the first page
      * @param s
      */
@@ -37,11 +31,4 @@ public interface ViewBehaviour {
      * @param s
      */
     public void setMissionDescriptionText(String s);
-
-    /**
-     * set the part1 of the mission
-     * @param s
-     */
-    public void setMissionPart1 (String s);
-
 }

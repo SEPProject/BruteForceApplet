@@ -1,12 +1,13 @@
 package model;
 
 import controller.*;
+import java.io.BufferedReader;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * model : manage the stored data of the application
@@ -44,12 +45,37 @@ public class Model implements ModelBehaviour {
      * set the worst password file
      * set the password manager
      */
+    
     public void init(){
-            worstList = new File("./data/worstList.txt");
+           // worstList = new File("./data/worstList.txt");
             passManager = new PasswordManager();
-
+            createPasswordFile();
     }
 
+    public void createPasswordFile(){
+        FileReader fr;
+        FileWriter fw;
+        BufferedReader br ;
+        BufferedWriter bw;
+        
+        try{
+            fw = new FileWriter("./data/passwordFile");
+            bw = new BufferedWriter(fw);
+            
+            bw.write("Administrator:500:" + passManager.getHashStored() +":::");
+            bw.write("Bob:100: :::");
+            bw.write("guest:501: :::");
+            
+            bw.close();
+        }catch(IOException e){
+            System.err.println(e);
+        }
+        
+        passwordFile = new File("./data/passwordFile");
+    }
+    
+    
+    @Override
     public File getWorstList() {
         return worstList;
     }
@@ -60,8 +86,8 @@ public class Model implements ModelBehaviour {
     }
 
     @Override
-    public File getFile(){
-        return worstList;
+    public File getPasswordFile(){
+        return passwordFile;
     }
 
     @Override
