@@ -1,4 +1,6 @@
 build.xml
+.DS_Store
+launcher.html
 manifest.mf
 nbproject/*
 logs/*
