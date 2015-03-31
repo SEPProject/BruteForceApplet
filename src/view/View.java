@@ -516,8 +516,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
          MissionPanel mp = new MissionPanel(300,430,"BruteForce Mission");
          Mission mission1 = new Mission("mission 1","description 1");
          mission1.addSubmission(new Submission(" mission 1 -> sub1","description submission : précise"));
-        // missionPlacePanel.add(mp.getPannelFrame());
-         //mp.getPannelFrame().revalidate();
+         missionPlacePanel.add(mp.getPannelFrame());
+         mp.getPannelFrame().setOpaque(true);
+         mp.getPannelFrame().revalidate();
     }
     
     
@@ -533,35 +534,32 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     }//GEN-LAST:event_entryPanelButtonActionPerformed
 
     private void m1FilebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1FilebuttonMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-      /*  FileReader fr;
+      
+        FileReader fr;
         BufferedReader br ;
         String newLine;
-       */ 
+        
         System.out.println("## view : m1FileButton > pressed ##");
         try{
-           /* fr = new FileReader(controller.getModel().getPasswordFile());
+            fr = new FileReader(controller.getModel().getPasswordFile());
             br = new BufferedReader(fr);
-           */ 
+           
             System.out.println("## view : m1FileButton ... file initialized ##");
-           /* while((newLine = br.readLine()) != null){
-                System.out.println("## view : m1FileButton ... reading line ##");
-                hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n",cmdStyle);
-                hackerView.insertString(hackerView.getLength(),newLine+"\n",attackStyle);
-                infoView.insertString(infoView.getLength(),"<<= see how hackers really do ! \n",infoStyle);
-            }*/
+            infoView.insertString(infoView.getLength(),"<<= see how hackers really do ! \n",infoStyle);
+            hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n\n",cmdStyle);
             
-            hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n",cmdStyle);
-            hackerPane.revalidate();
-            hackerPane.repaint();
-            infoPane.revalidate();
-       // }catch(FileNotFoundException e){
-         //   System.err.println(e);
+            while((newLine = br.readLine()) != null){
+                System.out.println("## view : m1FileButton ... reading line ##");
+                hackerView.insertString(hackerView.getLength(),newLine+"\n",attackStyle);
+                
+            }
+           
+        }catch(FileNotFoundException e){
+            System.err.println(e);
         }catch (BadLocationException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-       // }catch (IOException ex) {
-        //    System.err.println(ex);
+        }catch (IOException ex) {
+            System.err.println(ex);
         } 
         
     }//GEN-LAST:event_m1FilebuttonMouseClicked
