@@ -49,11 +49,12 @@ public class Model implements ModelBehaviour {
     public void init(){
            // worstList = new File("./data/worstList.txt");
             passManager = new PasswordManager();
-            createPasswordFile();
+           // createPasswordFile();
+            passwordFile = new File("./data/passwordFile");
     }
 
-    public void createPasswordFile(){
-        FileReader fr;
+    /*public void createPasswordFile(){
+      
         FileWriter fw;
         BufferedReader br ;
         BufferedWriter bw;
@@ -72,7 +73,7 @@ public class Model implements ModelBehaviour {
         }
         
         passwordFile = new File("./data/passwordFile");
-    }
+    }*/
     
     
     @Override

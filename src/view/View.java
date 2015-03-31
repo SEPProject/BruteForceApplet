@@ -5,6 +5,9 @@
  */
 package view;
 
+import MainComponents.Mission;
+import MainComponents.MissionPanel;
+import MainComponents.Submission;
 import controller.Controller;
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -13,6 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -69,7 +73,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
                     initComponents(); 
-                    entryPanel.setVisible(true); 
+                    //initMission();
+                   
+                    
+                    
+                    //entryPanel.setVisible(true); 
                     missionLayeredPanel.setVisible(false);
                     
                     /*
@@ -112,14 +120,8 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         entryPanelButton = new javax.swing.JButton();
         entryPanelScrollPanel = new javax.swing.JScrollPane();
         entryPanelText = new javax.swing.JTextArea();
+        fullPanel = new javax.swing.JPanel();
         controlPanel = new javax.swing.JPanel();
-        viewPanel = new javax.swing.JPanel();
-        hackerLabel = new javax.swing.JLabel();
-        infoLabel = new javax.swing.JLabel();
-        scrollInfoPane = new javax.swing.JScrollPane();
-        infoPane = new javax.swing.JTextPane();
-        scrollHackPane = new javax.swing.JScrollPane();
-        hackerPane = new javax.swing.JTextPane();
         missionLayeredPanel = new javax.swing.JLayeredPane();
         mission1Panel = new javax.swing.JPanel();
         m1HashField = new javax.swing.JTextField();
@@ -136,10 +138,18 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         m3AttakButton = new javax.swing.JButton();
         m3ConfirmButton = new javax.swing.JButton();
         m3PassField = new javax.swing.JTextField();
+        viewPanel = new javax.swing.JPanel();
+        hackerLabel = new javax.swing.JLabel();
+        infoLabel = new javax.swing.JLabel();
+        scrollInfoPane = new javax.swing.JScrollPane();
+        infoPane = new javax.swing.JTextPane();
+        scrollHackPane = new javax.swing.JScrollPane();
+        hackerPane = new javax.swing.JTextPane();
+        missionPlacePanel = new javax.swing.JPanel();
 
-        layoutPanel.setPreferredSize(new java.awt.Dimension(720, 430));
+        layoutPanel.setPreferredSize(new java.awt.Dimension(1020, 430));
 
-        entryPanel.setPreferredSize(new java.awt.Dimension(720, 430));
+        entryPanel.setPreferredSize(new java.awt.Dimension(1020, 430));
 
         entryPanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         entryPanelTitle.setText("Bienvenue sur l'applet de Brute Force");
@@ -167,72 +177,34 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         entryPanelLayout.setHorizontalGroup(
             entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entryPanelLayout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(entryPanelScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 219, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(entryPanelLayout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(entryPanelButton))
-                    .addGroup(entryPanelLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(entryPanelScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(entryPanelLayout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(entryPanelTitle)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                        .addComponent(entryPanelButton)
+                        .addGap(446, 446, 446))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
+                        .addComponent(entryPanelTitle)
+                        .addGap(391, 391, 391))))
         );
         entryPanelLayout.setVerticalGroup(
             entryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entryPanelLayout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(49, 49, 49)
                 .addComponent(entryPanelTitle)
-                .addGap(54, 54, 54)
+                .addGap(58, 58, 58)
                 .addComponent(entryPanelScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
+                .addGap(69, 69, 69)
                 .addComponent(entryPanelButton)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
+
+        fullPanel.setPreferredSize(new java.awt.Dimension(1020, 430));
 
         controlPanel.setPreferredSize(new java.awt.Dimension(720, 430));
-
-        viewPanel.setPreferredSize(new java.awt.Dimension(720, 430));
-
-        hackerLabel.setText("hacker view");
-
-        infoLabel.setText("info view");
-
-        scrollInfoPane.setViewportView(infoPane);
-
-        scrollHackPane.setViewportView(hackerPane);
-
-        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
-        viewPanel.setLayout(viewPanelLayout);
-        viewPanelLayout.setHorizontalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPanelLayout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(hackerLabel)
-                .addGap(300, 300, 300)
-                .addComponent(infoLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(scrollHackPane, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(scrollInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        viewPanelLayout.setVerticalGroup(
-            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(hackerLabel)
-                    .addComponent(infoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollInfoPane)
-                    .addComponent(scrollHackPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
-                .addContainerGap())
-        );
 
         missionLayeredPanel.setPreferredSize(new java.awt.Dimension(720, 149));
 
@@ -242,9 +214,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         m1HashField.setText("copy the hash");
 
         m1Filebutton.setText("fichier mot de passe");
-        m1Filebutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                m1FilebuttonActionPerformed(evt);
+        m1Filebutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m1FilebuttonMouseClicked(evt);
             }
         });
 
@@ -274,7 +246,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addGroup(mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(m1HashButton))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         m2ChoisirDic.setText("Choisir dictionnaire");
@@ -370,10 +342,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(missionLayeredPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, missionLayeredPanelLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(missionLayeredPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -389,10 +361,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 149, Short.MAX_VALUE)
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(missionLayeredPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, missionLayeredPanelLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(16, Short.MAX_VALUE)))
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(missionLayeredPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -408,31 +380,112 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         missionLayeredPanel.setLayer(mission2Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         missionLayeredPanel.setLayer(mission3Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        viewPanel.setPreferredSize(new java.awt.Dimension(720, 430));
+
+        hackerLabel.setText("hacker view");
+
+        infoLabel.setText("info view");
+
+        infoPane.setFocusable(false);
+        scrollInfoPane.setViewportView(infoPane);
+
+        hackerPane.setFocusable(false);
+        scrollHackPane.setViewportView(hackerPane);
+
+        javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
+        viewPanel.setLayout(viewPanelLayout);
+        viewPanelLayout.setHorizontalGroup(
+            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPanelLayout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(hackerLabel)
+                .addGap(300, 300, 300)
+                .addComponent(infoLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollHackPane, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scrollInfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        viewPanelLayout.setVerticalGroup(
+            viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hackerLabel)
+                    .addComponent(infoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollInfoPane)
+                    .addComponent(scrollHackPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout controlPanelLayout = new javax.swing.GroupLayout(controlPanel);
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(missionLayeredPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(missionLayeredPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
+            .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(viewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(missionLayeredPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        missionPlacePanel.setOpaque(false);
+
+        javax.swing.GroupLayout missionPlacePanelLayout = new javax.swing.GroupLayout(missionPlacePanel);
+        missionPlacePanel.setLayout(missionPlacePanelLayout);
+        missionPlacePanelLayout.setHorizontalGroup(
+            missionPlacePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+        missionPlacePanelLayout.setVerticalGroup(
+            missionPlacePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 430, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout fullPanelLayout = new javax.swing.GroupLayout(fullPanel);
+        fullPanel.setLayout(fullPanelLayout);
+        fullPanelLayout.setHorizontalGroup(
+            fullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fullPanelLayout.createSequentialGroup()
+                .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(missionPlacePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        fullPanelLayout.setVerticalGroup(
+            fullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fullPanelLayout.createSequentialGroup()
+                .addGroup(fullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(missionPlacePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layoutPanelLayout = new javax.swing.GroupLayout(layoutPanel);
         layoutPanel.setLayout(layoutPanelLayout);
         layoutPanelLayout.setHorizontalGroup(
             layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(entryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layoutPanelLayout.createSequentialGroup()
+                .addComponent(entryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layoutPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fullPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layoutPanelLayout.setVerticalGroup(
@@ -441,11 +494,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             .addGroup(layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layoutPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fullPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         layoutPanel.setLayer(entryPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        layoutPanel.setLayer(controlPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layoutPanel.setLayer(fullPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -459,6 +512,15 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void initMission(){
+         MissionPanel mp = new MissionPanel(300,430,"BruteForce Mission");
+         Mission mission1 = new Mission("mission 1","description 1");
+         mission1.addSubmission(new Submission(" mission 1 -> sub1","description submission : précise"));
+        // missionPlacePanel.add(mp.getPannelFrame());
+         //mp.getPannelFrame().revalidate();
+    }
+    
+    
     private void entryPanelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryPanelButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("## view : commencer > pressed ##");
@@ -470,34 +532,39 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         mission1Panel.setVisible(true);
     }//GEN-LAST:event_entryPanelButtonActionPerformed
 
-    private void m1FilebuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m1FilebuttonActionPerformed
+    private void m1FilebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1FilebuttonMouseClicked
         // TODO add your handling code here:
-        FileReader fr;
+        // TODO add your handling code here:
+      /*  FileReader fr;
         BufferedReader br ;
         String newLine;
-        
+       */ 
         System.out.println("## view : m1FileButton > pressed ##");
         try{
-            fr = new FileReader(controller.getModel().getPasswordFile());
+           /* fr = new FileReader(controller.getModel().getPasswordFile());
             br = new BufferedReader(fr);
+           */ 
             System.out.println("## view : m1FileButton ... file initialized ##");
-            while((newLine = br.readLine()) != null){
+           /* while((newLine = br.readLine()) != null){
                 System.out.println("## view : m1FileButton ... reading line ##");
                 hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n",cmdStyle);
                 hackerView.insertString(hackerView.getLength(),newLine+"\n",attackStyle);
-                infoView.insertString(infoView.getLength(),"<<= see how hackers really do ! \n",infoStyle);               
-            }
-        }catch(FileNotFoundException e){
-            System.err.println(e);
+                infoView.insertString(infoView.getLength(),"<<= see how hackers really do ! \n",infoStyle);
+            }*/
+            
+            hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n",cmdStyle);
+            hackerPane.revalidate();
+            hackerPane.repaint();
+            infoPane.revalidate();
+       // }catch(FileNotFoundException e){
+         //   System.err.println(e);
         }catch (BadLocationException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
-        }catch (IOException ex) {
-            System.err.println(ex);
+       // }catch (IOException ex) {
+        //    System.err.println(ex);
         } 
         
-        
-        
-    }//GEN-LAST:event_m1FilebuttonActionPerformed
+    }//GEN-LAST:event_m1FilebuttonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -507,6 +574,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JScrollPane entryPanelScrollPanel;
     private javax.swing.JTextArea entryPanelText;
     private javax.swing.JLabel entryPanelTitle;
+    private javax.swing.JPanel fullPanel;
     private javax.swing.JLabel hackerLabel;
     private javax.swing.JTextPane hackerPane;
     private javax.swing.JLabel infoLabel;
@@ -528,6 +596,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JPanel mission2Panel;
     private javax.swing.JPanel mission3Panel;
     private javax.swing.JLayeredPane missionLayeredPanel;
+    private javax.swing.JPanel missionPlacePanel;
     private javax.swing.JScrollPane scrollHackPane;
     private javax.swing.JScrollPane scrollInfoPane;
     private javax.swing.JPanel viewPanel;
