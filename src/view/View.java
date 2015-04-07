@@ -37,7 +37,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     
     
     private StyledDocument hackerView, infoView;
-    private Style  errorStyle, infoStyle, attackStyle, cmdStyle;
+    private Style  errorStyle, succeedStyle, infoStyle, attackStyle, cmdStyle;
     
     
     @Override
@@ -87,16 +87,17 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                     infoView = infoPane.getStyledDocument();
                     errorStyle = infoPane.addStyle("errStyle", null);
                     infoStyle = infoPane.addStyle("infoStyle", null);
+                    succeedStyle = infoPane.addStyle("suceedStyle",null);
                     
                     hackerView = hackerPane.getStyledDocument();
                     attackStyle = hackerPane.addStyle("attackStyle",null);
                     cmdStyle = hackerPane.addStyle("cmdStyle",null);
                     
                     StyleConstants.setForeground(infoStyle, Color.BLACK);
+                    StyleConstants.setForeground(succeedStyle, Color.GREEN);
                     StyleConstants.setForeground(errorStyle, Color.RED);
                     StyleConstants.setForeground(attackStyle,Color.BLACK);
                     StyleConstants.setForeground(cmdStyle,Color.GRAY);
-                    
                    
                 }
             });
@@ -124,9 +125,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         controlPanel = new javax.swing.JPanel();
         missionLayeredPanel = new javax.swing.JLayeredPane();
         mission1Panel = new javax.swing.JPanel();
-        m1HashField = new javax.swing.JTextField();
         m1Filebutton = new javax.swing.JButton();
         m1HashButton = new javax.swing.JButton();
+        m1HashField = new javax.swing.JTextField();
         mission2Panel = new javax.swing.JPanel();
         m2ChoisirDic = new javax.swing.JLabel();
         m2ListDic = new javax.swing.JComboBox();
@@ -210,9 +211,6 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
         mission1Panel.setPreferredSize(new java.awt.Dimension(720, 149));
 
-        m1HashField.setForeground(new java.awt.Color(204, 204, 204));
-        m1HashField.setText("copy the hash");
-
         m1Filebutton.setText("fichier mot de passe");
         m1Filebutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -221,6 +219,13 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         });
 
         m1HashButton.setText("confirm hash");
+        m1HashButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m1HashButtonMouseClicked(evt);
+            }
+        });
+
+        m1HashField.setText("Enter Hash");
 
         javax.swing.GroupLayout mission1PanelLayout = new javax.swing.GroupLayout(mission1Panel);
         mission1Panel.setLayout(mission1PanelLayout);
@@ -228,14 +233,15 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mission1PanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
-                .addComponent(m1Filebutton)
-                .addGap(0, 477, Short.MAX_VALUE))
-            .addGroup(mission1PanelLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(m1HashButton)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGroup(mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mission1PanelLayout.createSequentialGroup()
+                        .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(m1HashButton)
+                        .addContainerGap(106, Short.MAX_VALUE))
+                    .addGroup(mission1PanelLayout.createSequentialGroup()
+                        .addComponent(m1Filebutton)
+                        .addGap(0, 477, Short.MAX_VALUE))))
         );
         mission1PanelLayout.setVerticalGroup(
             mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +250,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addComponent(m1Filebutton)
                 .addGap(50, 50, 50)
                 .addGroup(mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m1HashButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(m1HashButton)
+                    .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         m2ChoisirDic.setText("Choisir dictionnaire");
@@ -259,6 +265,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         m2AutoButton.setText("auto remplissage");
 
         m2AddWordButton.setText("ajouter mot au dictionnaire");
+        m2AddWordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m2AddWordButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout mission2PanelLayout = new javax.swing.GroupLayout(mission2Panel);
         mission2Panel.setLayout(mission2PanelLayout);
@@ -389,7 +400,6 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         infoPane.setFocusable(false);
         scrollInfoPane.setViewportView(infoPane);
 
-        hackerPane.setFocusable(false);
         scrollHackPane.setViewportView(hackerPane);
 
         javax.swing.GroupLayout viewPanelLayout = new javax.swing.GroupLayout(viewPanel);
@@ -545,7 +555,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             br = new BufferedReader(fr);
            
             System.out.println("## view : m1FileButton ... file initialized ##");
-            infoView.insertString(infoView.getLength(),"<<= see how hackers really do ! \n",infoStyle);
+            infoView.insertString(infoView.getLength(),"<== see how hackers really do ! \n",infoStyle);
             hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n\n",cmdStyle);
             
             while((newLine = br.readLine()) != null){
@@ -564,6 +574,35 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         
     }//GEN-LAST:event_m1FilebuttonMouseClicked
 
+    private void m1HashButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1HashButtonMouseClicked
+        // TODO add your handling code here:
+       try{
+            System.out.println("## view : m1HashButton > pressed ##");
+            if (controller.getModel().getPasswordManager().testHashUser(m1HashField.getText())){
+                System.out.println("## view : m1FileButton ... good hash ##");
+                infoView.insertString(infoView.getLength(),"good hash\n",succeedStyle);
+                infoView.insertString(infoView.getLength(),"See next mission ==> \n",infoStyle);
+                mission1Panel.setVisible(false);
+                mission2Panel.setVisible(true);
+                hackerPane.setText("");
+            }else{
+                System.out.println("## view : m1FileButton ... bad hash ##");
+                infoView.insertString(infoView.getLength(),"wrong hash\n",errorStyle);
+            }
+        }catch(BadLocationException error){
+            System.out.println(error);
+        }
+    }//GEN-LAST:event_m1HashButtonMouseClicked
+
+    private void m2AddWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2AddWordButtonMouseClicked
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_m2AddWordButtonMouseClicked
+
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;

@@ -291,15 +291,18 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                                  <Component id="m1Filebutton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="m1HashField" min="-2" pref="411" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="m1HashButton" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="106" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="m1HashField" min="-2" pref="404" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="m1HashButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="106" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="m1Filebutton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="477" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -310,23 +313,15 @@
                                   <Component id="m1Filebutton" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="m1HashField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="m1HashButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m1HashField" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="22" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="m1HashField">
-                          <Properties>
-                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="copy the hash"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JButton" name="m1Filebutton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="fichier mot de passe"/>
@@ -338,6 +333,14 @@
                         <Component class="javax.swing.JButton" name="m1HashButton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="confirm hash"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m1HashButtonMouseClicked"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JTextField" name="m1HashField">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Enter Hash"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -423,6 +426,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="ajouter mot au dictionnaire"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m2AddWordButtonMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -572,9 +578,6 @@
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
                         <Component class="javax.swing.JTextPane" name="hackerPane">
-                          <Properties>
-                            <Property name="focusable" type="boolean" value="false"/>
-                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
