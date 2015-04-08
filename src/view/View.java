@@ -146,7 +146,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         infoPane = new javax.swing.JTextPane();
         scrollHackPane = new javax.swing.JScrollPane();
         hackerPane = new javax.swing.JTextPane();
-        missionPlacePanel = new javax.swing.JPanel();
+        missionPlacePanel = new javax.swing.JLayeredPane();
 
         layoutPanel.setPreferredSize(new java.awt.Dimension(1020, 430));
 
@@ -209,7 +209,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
         missionLayeredPanel.setPreferredSize(new java.awt.Dimension(720, 149));
 
-        mission1Panel.setPreferredSize(new java.awt.Dimension(720, 149));
+        mission1Panel.setPreferredSize(new java.awt.Dimension(720, 145));
 
         m1Filebutton.setText("fichier mot de passe");
         m1Filebutton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -252,8 +252,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addGroup(mission1PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(m1HashButton)
                     .addComponent(m1HashField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        mission2Panel.setPreferredSize(new java.awt.Dimension(720, 145));
 
         m2ChoisirDic.setText("Choisir dictionnaire");
 
@@ -279,33 +281,35 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addGap(41, 41, 41)
                 .addGroup(mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mission2PanelLayout.createSequentialGroup()
-                        .addComponent(m2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
-                        .addComponent(m2AddWordButton)
-                        .addContainerGap(48, Short.MAX_VALUE))
-                    .addGroup(mission2PanelLayout.createSequentialGroup()
                         .addGroup(mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(m2ListDic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(m2ChoisirDic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(m2AutoButton)
-                        .addGap(56, 56, 56))))
+                        .addGap(58, 58, 58))
+                    .addGroup(mission2PanelLayout.createSequentialGroup()
+                        .addComponent(m2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addComponent(m2AddWordButton)
+                        .addGap(48, 48, 48))))
         );
         mission2PanelLayout.setVerticalGroup(
             mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mission2PanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(m2ChoisirDic)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(m2ListDic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(m2AutoButton))
-                .addGap(19, 19, 19)
+                .addGap(14, 14, 14)
                 .addGroup(mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(m2AddWordButton)
-                    .addComponent(m2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(m2ChoisirDic)
+                    .addComponent(m2AutoButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(m2ListDic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mission2PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(m2TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(m2AddWordButton))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
+
+        mission3Panel.setPreferredSize(new java.awt.Dimension(720, 145));
 
         m3FillDicoButton.setText("remplir dictionnaire");
 
@@ -351,12 +355,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         missionLayeredPanel.setLayout(missionLayeredPanelLayout);
         missionLayeredPanelLayout.setHorizontalGroup(
             missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, missionLayeredPanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(missionLayeredPanelLayout.createSequentialGroup()
+                .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(missionLayeredPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -370,12 +371,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         );
         missionLayeredPanelLayout.setVerticalGroup(
             missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 149, Short.MAX_VALUE)
-            .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, missionLayeredPanelLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(16, Short.MAX_VALUE)))
+            .addGroup(missionLayeredPanelLayout.createSequentialGroup()
+                .addComponent(mission1Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 4, Short.MAX_VALUE))
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(missionLayeredPanelLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -383,15 +381,15 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(missionLayeredPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(missionLayeredPanelLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 61, Short.MAX_VALUE)
                     .addComponent(mission3Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 61, Short.MAX_VALUE)))
         );
         missionLayeredPanel.setLayer(mission1Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         missionLayeredPanel.setLayer(mission2Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         missionLayeredPanel.setLayer(mission3Panel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        viewPanel.setPreferredSize(new java.awt.Dimension(720, 430));
+        viewPanel.setPreferredSize(new java.awt.Dimension(720, 285));
 
         hackerLabel.setText("hacker view");
 
@@ -429,7 +427,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(viewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(scrollInfoPane)
-                    .addComponent(scrollHackPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                    .addComponent(scrollHackPane, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -437,23 +435,20 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         controlPanel.setLayout(controlPanelLayout);
         controlPanelLayout.setHorizontalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(missionLayeredPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
-            .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(missionLayeredPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(viewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         controlPanelLayout.setVerticalGroup(
             controlPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(viewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(viewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(missionLayeredPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        missionPlacePanel.setOpaque(false);
+        missionPlacePanel.setPreferredSize(new java.awt.Dimension(300, 430));
+        missionPlacePanel.setSize(new java.awt.Dimension(300, 430));
 
         javax.swing.GroupLayout missionPlacePanelLayout = new javax.swing.GroupLayout(missionPlacePanel);
         missionPlacePanel.setLayout(missionPlacePanelLayout);
@@ -472,9 +467,9 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             fullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fullPanelLayout.createSequentialGroup()
                 .addComponent(controlPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(missionPlacePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         fullPanelLayout.setVerticalGroup(
             fullPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,11 +519,13 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
     public void initMission(){
          MissionPanel mp = new MissionPanel(300,430,"BruteForce Mission");
+         mp.getPannelFrame().setPreferredSize(new java.awt.Dimension(300, 430));
+         mp.getPannelFrame().setSize(new java.awt.Dimension(300, 430));
          Mission mission1 = new Mission("mission 1","description 1");
          mission1.addSubmission(new Submission(" mission 1 -> sub1","description submission : précise"));
-         missionPlacePanel.add(mp.getPannelFrame());
-         mp.getPannelFrame().setOpaque(true);
-         mp.getPannelFrame().revalidate();
+         mp.addMission(mission1);
+         missionPlacePanel.add(mp.getPannelFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
     }
     
     
@@ -536,7 +533,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         // TODO add your handling code here:
         System.out.println("## view : commencer > pressed ##");
         entryPanel.setVisible(false);
-        controller.initMission1();
+        initMission();
         missionLayeredPanel.setVisible(true);
         mission2Panel.setVisible(false);
         mission3Panel.setVisible(false);
@@ -633,7 +630,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JPanel mission2Panel;
     private javax.swing.JPanel mission3Panel;
     private javax.swing.JLayeredPane missionLayeredPanel;
-    private javax.swing.JPanel missionPlacePanel;
+    private javax.swing.JLayeredPane missionPlacePanel;
     private javax.swing.JScrollPane scrollHackPane;
     private javax.swing.JScrollPane scrollInfoPane;
     private javax.swing.JPanel viewPanel;
