@@ -10,12 +10,13 @@ import java.util.Scanner;
 
 public class Controller implements Controller2Model, Controller2View {
 
-    private Model model ;
+    private Model model;
     private View view;
 
     public Controller(View v){
         Model mod = new Model();
-        this.model=mod;     
+        
+        this.model=mod;
         this.view = v;
     }
 
@@ -39,6 +40,13 @@ public class Controller implements Controller2Model, Controller2View {
         return view;
     }
 
+    @Override
+    public void performAddWordToDict(String word,String dictionnary){
+       
+        System.out.println("## controller : performAddwordToDict __ param word = "+word+" __ param dictionnary = "+dictionnary+" ##");
+        model.addWordToDict(word, dictionnary);
+    }
+    
     /**
      * set the mission description + parts
      */
@@ -67,10 +75,8 @@ public class Controller implements Controller2Model, Controller2View {
     public void initMission1(){
        // model.getFile();
     }
-
-
-
-
+    
+    /*
 
     public boolean bruteforceAttempt() {
 
@@ -126,6 +132,6 @@ public class Controller implements Controller2Model, Controller2View {
 
 
 
-    }
+    }*/
 
 }

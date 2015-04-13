@@ -16,7 +16,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
+import javax.swing.JComboBox;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -72,17 +72,17 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
                 public void run() {
-                    initComponents(); 
-                    //initMission();
-                   
+                    initComponents();
                     
-                    
-                    //entryPanel.setVisible(true); 
-                    missionLayeredPanel.setVisible(false);
-                    
+                    // init the list of dictionnary
+                    initDictList();
+                                               
                     /*
                     * styles' initialization
                     * Red for error printed for user
+                    * Black for normal info
+                    * Green for succeed mission
+                    * Gray for real commands
                     */
                     infoView = infoPane.getStyledDocument();
                     errorStyle = infoPane.addStyle("errStyle", null);
@@ -99,6 +99,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                     StyleConstants.setForeground(attackStyle,Color.BLACK);
                     StyleConstants.setForeground(cmdStyle,Color.GRAY);
                    
+                    //entryPanel.setVisible(true); 
+                    missionLayeredPanel.setVisible(false);
+                    
+                    
+                    
                 }
             });
         } catch (Exception ex) {
@@ -130,7 +135,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         m1HashField = new javax.swing.JTextField();
         mission2Panel = new javax.swing.JPanel();
         m2ChoisirDic = new javax.swing.JLabel();
-        m2ListDic = new javax.swing.JComboBox();
+        m2ListDic = new javax.swing.JComboBox<String>();
         m2TextField = new javax.swing.JTextField();
         m2AutoButton = new javax.swing.JButton();
         m2AddWordButton = new javax.swing.JButton();
@@ -258,8 +263,6 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         mission2Panel.setPreferredSize(new java.awt.Dimension(720, 145));
 
         m2ChoisirDic.setText("Choisir dictionnaire");
-
-        m2ListDic.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "wordlist", "disneyland", "motsfrancais" }));
 
         m2TextField.setForeground(new java.awt.Color(204, 204, 204));
         m2TextField.setText("Entrer un mot");
@@ -525,7 +528,13 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
          mission1.addSubmission(new Submission(" mission 1 -> sub1","description submission : précise"));
          mp.addMission(mission1);
          missionPlacePanel.add(mp.getPannelFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+    }
+    
+    public void initDictList(){
+        for(String s : controller.getModel().getDictList()){
+            m2ListDic.addItem(s);
+        }
+       // m2ListDic = new JComboBox(controller.getModel().getDictList());
     }
     
     
@@ -593,8 +602,8 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
     private void m2AddWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2AddWordButtonMouseClicked
         // TODO add your handling code here:
-        
-        
+        System.out.println("## view : m2AddWordButton > pressed ##");
+        controller.performAddWordToDict(m2TextField.getText(),(String) m2ListDic.getSelectedItem());
     }//GEN-LAST:event_m2AddWordButtonMouseClicked
 
     
@@ -620,7 +629,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JButton m2AddWordButton;
     private javax.swing.JButton m2AutoButton;
     private javax.swing.JLabel m2ChoisirDic;
-    private javax.swing.JComboBox m2ListDic;
+    private javax.swing.JComboBox<String> m2ListDic;
     private javax.swing.JTextField m2TextField;
     private javax.swing.JButton m3AttakButton;
     private javax.swing.JButton m3ConfirmButton;

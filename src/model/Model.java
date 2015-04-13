@@ -1,13 +1,11 @@
 package model;
 
 import controller.*;
-import java.io.BufferedReader;
-
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * model : manage the stored data of the application
@@ -15,7 +13,7 @@ import java.io.IOException;
 public class Model implements ModelBehaviour {
 
     public Controller controller;
-
+    
     /**
      * a list of the worst password
      */
@@ -30,11 +28,22 @@ public class Model implements ModelBehaviour {
      * the password manager
      */
     private PasswordManager passManager;
+    
+    /**
+     * a list of existing file
+     */
+    public ArrayList<String> dictList;
+    
+    /**
+     * hashmap of dictionnary
+     */
+    public HashMap<String,File> dictMap;
+    
 
     /**
      * the description of the applet : summary
      */
-    private String description;
+    //private String description;
 
     public Model(){
         init();
@@ -49,53 +58,66 @@ public class Model implements ModelBehaviour {
     public void init(){
            // worstList = new File("./data/worstList.txt");
             passManager = new PasswordManager();
-           // createPasswordFile();
             passwordFile = new File("./data/passwordFile");
+            
+            initDictList(); 
     }
-
-    /*public void createPasswordFile(){
-      
-        FileWriter fw;
-        BufferedReader br ;
-        BufferedWriter bw;
+    
+    public void initDictList(){
+        this.dictList = new ArrayList<>();
+        dictMap = new HashMap<>();
+        File testDico = new File("./data/testDico");
+        File worstList = new File("./data/worstList.txt");
+        File disney = new File("./data/disney");
         
-        try{
-            fw = new FileWriter("./data/passwordFile");
-            bw = new BufferedWriter(fw);
-            
-            bw.write("Administrator:500:" + passManager.getHashStored() +":::");
-            bw.write("Bob:100: :::");
-            bw.write("guest:501: :::");
-            
-            bw.close();
-        }catch(IOException e){
-            System.err.println(e);
+        dictMap.put("testDico",testDico);
+        dictMap.put("worstList",worstList);
+        dictMap.put("disney",disney);
+              
+        for(String s : dictMap.keySet()) {
+            if(dictMap.get(s).exists()){
+                dictList.add(s);
+            }
         }
-        
-        passwordFile = new File("./data/passwordFile");
-    }*/
-    
-    
-    @Override
-    public File getWorstList() {
-        return worstList;
     }
-
+    
+    
     @Override
     public void setController(Controller c){
         this.controller = c;
     }
-
+    
     @Override
     public File getPasswordFile(){
         return passwordFile;
     }
-
+    
     @Override
     public PasswordManager getPasswordManager(){
         return passManager;
     }
 
+    @Override
+    public ArrayList<String> getDictList(){
+        return this.dictList;
+    }
+    
+    @Override
+    public void addWordToDict(String word, String dict){
+        System.out.println("## model : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
+        
+        FileWriter fw = null;
+        try{
+            fw = new FileWriter(dictMap.get(dict),true);
+            fw.write(word+ "\n");
+            fw.close();
+        }catch(IOException e){
+            System.err.println(e);
+        }
+        
+    }
+    
+    /*
     @Override
     public String getDescription(){
         return description;
@@ -105,6 +127,6 @@ public class Model implements ModelBehaviour {
     public void setDescription(String s){
         description = s;
     }
-
+*/
 
 }

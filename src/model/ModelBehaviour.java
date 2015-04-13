@@ -1,6 +1,7 @@
 package model;
 import controller.*;
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * model interface
@@ -13,33 +14,39 @@ public interface ModelBehaviour {
      */
     public void setController(Controller c);
 
-   /**
-    * return the worst list of password
-    * @return
-    */
-    public File getWorstList();
     /**
      * return the password File where the hash is stored
      * @return
      */
     public File getPasswordFile();
-    
 
     /**
      * return the password manager of the model
      * @return
      */
     public PasswordManager getPasswordManager();
-
+    
+    /**
+     * return the list of existing dictionnary
+     * @return 
+     */
+    public ArrayList<String> getDictList();
+    
+    /**
+     * add the word to the dictonnary
+     */
+    public void addWordToDict(String word,String dict);
+    
+   
     /**
      * return the description of the applet
      * @return
      */
-    public String getDescription();
+     //public String getDescription();
 
     /**
      * set the description of the applet
      * @param s
      */
-    public void setDescription(String s);
+    //public void setDescription(String s);
 }
