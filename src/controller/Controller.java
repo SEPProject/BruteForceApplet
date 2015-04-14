@@ -43,43 +43,70 @@ public class Controller implements Controller2Model, Controller2View {
     @Override
     public void performAddWordToDict(String word,String dictionnary){
        
-        System.out.println("## controller : performAddwordToDict __ param word = "+word+" __ param dictionnary = "+dictionnary+" ##");
+        System.out.println("## CONTROLLER : performAddwordToDict __ param word = "+word+" __ param dictionnary = "+dictionnary+" ##");
         model.addWordToDict(word, dictionnary);
     }
     
-    /**
-     * set the mission description + parts
-     */
-    /*public void setMissionApplet(){
-
-        model.getMission().setDescription("We lost the password of our computer, but we" +
-                " have the file where it's stored in the computer that you can see" +
-                " clicking on the : passwordfile button. To retrieve it we propose to you" +
-                " to use a Brute force attack. ");
-
-        view.setMissionDescriptionText(getModel().getMission().getDescription());
-
-        model.getMission().setPart(0, "1) As you can see the passwordFile is unreadable." +
-                " That's because the computer stores encrypted password. Hopefully" +
-                " you know the encryption algorithm, then you just need to try words," +
-                " encrypt them then compare them to the stored encrypted password. Hopefully" +
-                " the encryption is made by the applet. The next step is to build a dictionnary." +
-                " It's a file where every suggestion of password are stored and will be browsed " +
-                "to be tried. Now add words that you think can be the password. ");
-
-        view.setMissionPart1(getModel().getMission().getPart(0));
-
-    }*/
-
     @Override
-    public void initMission1(){
-       // model.getFile();
+    public void performCloseApplet(){
+        System.out.println("## CONTROLLER : performCloseApplet ##");
+        model.cleanModel();
     }
     
+    @Override
+    public void performAttack(String dictionnary){
+        String passHashed = "";
+        FileReader fr ;
+        BufferedReader br ;
+        String attempt;
+        Boolean found = false;
+
+        System.out.println("## CONTROLLER : performATTACK ##");
+        view.printMessage("\n\n");
+        view.printMessage("** TENTATIVE DE BRUTE FORCE **\n");
+
+        passHashed = model.getPasswordManager().getHashStored();
+        view.printMessage("> rappel :\nHASH = "+ passHashed +"\n");
+        view.printMessage("DICTIONNAIRE = "+ dictionnary +"\n\n");
+
+        try{
+            fr = new FileReader(model.getDictionnary(dictionnary));
+            br = new BufferedReader(fr);
+
+            System.out.println("## CONTROLLER  Attack starting... ##");
+
+            while (((attempt = br.readLine())!= null) && !found)  {
+                System.out.println("## CONTROLLER >> attempting :" + attempt + " ##");
+                if (model.getPasswordManager().hash(attempt).equals(passHashed)){
+                    found = true;
+                    System.out.println("## CONTROLLER >> SUCCEED password = " + attempt + " ##");
+                    view.printMessage("***********************\n\n");                   
+                    view.printMessage("PASSWORD = "+ attempt +"\n");
+                    model.getPasswordManager().setPasswordFound(attempt);
+                }
+            }
+
+            if(!found){
+                System.out.println("## CONTROLLER >> FAILED password not found ##");
+                view.printMessage("***********************\n\n");             
+                view.printMessage("ECHEC DE LA TENTATIVE \n\n");
+            }
+            br.close();
+
+            System.out.println("## CONTROLLER >> done ! ##");
+        }catch(IOException e){
+            System.err.println(e);
+        }
+    }
+    
+    
+    
+    
+    
+    
     /*
-
-    public boolean bruteforceAttempt() {
-
+    @Override
+    public boolean performAttack(String dictionnary){
         String password = "" ;
         String passHashed = "";
         Scanner sc = new Scanner(System.in);
@@ -105,7 +132,7 @@ public class Controller implements Controller2Model, Controller2View {
 
         try{
 
-            fr = new FileReader(model.getWorstList());
+            fr = new FileReader(model.getDictionnary(dictionnary));
             br = new BufferedReader(fr);
 
             System.out.println(">> Attack starting... ");
@@ -129,9 +156,45 @@ public class Controller implements Controller2Model, Controller2View {
         }
 
         return found ;
-
-
-
     }*/
 
+    /*
+    @Override
+    public void initMission1(){
+       // model.getFile();
+    }*/
+    
+    
+    
+    
+    /**
+     * set the mission description + parts
+     */
+    /*public void setMissionApplet(){
+
+        model.getMission().setDescription("We lost the password of our computer, but we" +
+                " have the file where it's stored in the computer that you can see" +
+                " clicking on the : passwordfile button. To retrieve it we propose to you" +
+                " to use a Brute force attack. ");
+
+        view.setMissionDescriptionText(getModel().getMission().getDescription());
+
+        model.getMission().setPart(0, "1) As you can see the passwordFile is unreadable." +
+                " That's because the computer stores encrypted password. Hopefully" +
+                " you know the encryption algorithm, then you just need to try words," +
+                " encrypt them then compare them to the stored encrypted password. Hopefully" +
+                " the encryption is made by the applet. The next step is to build a dictionnary." +
+                " It's a file where every suggestion of password are stored and will be browsed " +
+                "to be tried. Now add words that you think can be the password. ");
+
+        view.setMissionPart1(getModel().getMission().getPart(0));
+
+    }*/
+    
+    
+    
+    
+    
+    
+    
 }

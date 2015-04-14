@@ -2,22 +2,23 @@ package model;
 
 import controller.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * model : manage the stored data of the application
  */
 public class Model implements ModelBehaviour {
 
-    public Controller controller;
-    
-    /**
-     * a list of the worst password
-     */
-    public File worstList;
+    private Controller controller;
 
     /**
      * the file where the password to find is stored
@@ -32,12 +33,12 @@ public class Model implements ModelBehaviour {
     /**
      * a list of existing file
      */
-    public ArrayList<String> dictList;
+    private ArrayList<String> dictList;
     
     /**
      * hashmap of dictionnary
      */
-    public HashMap<String,File> dictMap;
+    private HashMap<String,File> dictMap;
     
 
     /**
@@ -56,19 +57,20 @@ public class Model implements ModelBehaviour {
      */
     
     public void init(){
-           // worstList = new File("./data/worstList.txt");
+            System.out.println("## MODEL : init ##");
             passManager = new PasswordManager();
             passwordFile = new File("./data/passwordFile");
-            
             initDictList(); 
     }
     
     public void initDictList(){
+        System.out.println("## MODEL : initDictList ##");
+        
         this.dictList = new ArrayList<>();
         dictMap = new HashMap<>();
-        File testDico = new File("./data/testDico");
-        File worstList = new File("./data/worstList.txt");
-        File disney = new File("./data/disney");
+        File testDico = new File("./data/testDicoInit");
+        File worstList = new File("./data/worstListInit");
+        File disney = new File("./data/disneyInit");
         
         dictMap.put("testDico",testDico);
         dictMap.put("worstList",worstList);
@@ -76,11 +78,55 @@ public class Model implements ModelBehaviour {
               
         for(String s : dictMap.keySet()) {
             if(dictMap.get(s).exists()){
+                File f = new File("./data/"+s);
+                copieFile(dictMap.get(s),f);
+                dictMap.replace(s,f);
                 dictList.add(s);
             }
         }
     }
     
+    public void copieFile(File source,File dest){
+        FileChannel in = null;
+        FileChannel out = null;
+        
+        System.out.println("## MODEL : copieFile ##");
+        
+        try{
+            in = new FileInputStream(source).getChannel();
+            out = new FileOutputStream(dest).getChannel();
+            
+            
+            in.transferTo(0, in.size(), out);
+            
+        }catch (IOException ex) {
+            System.err.println(ex);
+        }finally{
+            if (in != null){
+                try{
+                    in.close();
+                }catch(IOException e){
+                    System.err.println(e);
+                }
+            }
+            if(out!= null){
+                try{
+                    out.close();
+                }catch(IOException e){
+                    System.err.println(e);
+                }
+            }
+            
+        }      
+    }
+    
+    @Override
+    public void cleanModel(){
+        System.out.println("## MODEL : cleanModel ##");     
+        for(String s : dictMap.keySet()){
+            dictMap.get(s).delete();
+        }
+    }
     
     @Override
     public void setController(Controller c){
@@ -104,7 +150,7 @@ public class Model implements ModelBehaviour {
     
     @Override
     public void addWordToDict(String word, String dict){
-        System.out.println("## model : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
+        System.out.println("## MODEL : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
         
         FileWriter fw = null;
         try{
@@ -113,8 +159,11 @@ public class Model implements ModelBehaviour {
             fw.close();
         }catch(IOException e){
             System.err.println(e);
-        }
-        
+        }   
+    }
+    
+    public File getDictionnary(String dictName){
+        return dictMap.get(dictName);
     }
     
     /*

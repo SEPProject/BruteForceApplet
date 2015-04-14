@@ -24,9 +24,21 @@ public interface Controller2View {
     
     
     /**
-     * initialise the password file + model to start mission1
+     * from view : clean the applet ressources
      */
-    public void initMission1();
+    public void performCloseApplet();
+    
+    /**
+     * launch the brute force attempt
+     * @param dictionnary 
+     */
+    public void performAttack(String dictionnary);
+    
+    
+    /**
+     * what ?
+     */
+    //public void initMission1();
     
     
     

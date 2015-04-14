@@ -19,16 +19,24 @@ public interface ViewBehaviour {
      * @return
      */
     public Controller getController();
+    
+    /**
+     * print a message from controller
+     * @param message 
+     */
+    public void printMessage(String message);
+    
+    
 
     /**
      * set the applet description on the first page
      * @param s
      */
-    public void setAppletDescriptionText(String s);
+    //public void setAppletDescriptionText(String s);
 
     /**
      * set the description of the mission
      * @param s
      */
-    public void setMissionDescriptionText(String s);
+    //public void setMissionDescriptionText(String s);
 }

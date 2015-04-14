@@ -37,6 +37,10 @@ public interface ModelBehaviour {
      */
     public void addWordToDict(String word,String dict);
     
+    /**
+     * clean the model ressources
+     */
+    public void cleanModel(); 
    
     /**
      * return the description of the applet

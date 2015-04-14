@@ -13,6 +13,7 @@ public class PasswordManager implements PasswordManagerBehaviour {
      * the hash of the password
      */
     private String hashStored = "";
+    private String passwordFound = "";
 
     public PasswordManager(){
         setHashStored("viking");
@@ -35,6 +36,16 @@ public class PasswordManager implements PasswordManagerBehaviour {
         }else{
             return false;
         }
+    }
+    
+    @Override
+    public void setPasswordFound(String pass){
+        this.passwordFound = pass;
+    }
+    
+    @Override
+    public String getPasswordFound(){
+        return this.passwordFound;
     }
 
 

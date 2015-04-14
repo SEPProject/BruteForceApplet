@@ -327,6 +327,9 @@
                         </Component>
                         <Component class="javax.swing.JTextField" name="m1HashField">
                           <Properties>
+                            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                              <Color blue="66" green="66" red="66" type="rgb"/>
+                            </Property>
                             <Property name="text" type="java.lang.String" value="Enter Hash"/>
                           </Properties>
                         </Component>
@@ -342,23 +345,28 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="m2ListDic" max="32767" attributes="0"/>
-                                              <Component id="m2ChoisirDic" max="32767" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="m2AutoButton" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="m2ListDic" max="32767" attributes="0"/>
+                                          <Component id="m2ChoisirDic" max="32767" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="m2TextField" min="-2" pref="357" max="-2" attributes="0"/>
-                                          <EmptySpace pref="59" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
                                           <Component id="m2AddWordButton" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="m2TextField" min="-2" pref="215" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="m2Mission3Button" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="m2AutoButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -366,20 +374,27 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="m2ChoisirDic" min="-2" max="-2" attributes="0"/>
-                                      <Component id="m2AutoButton" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="m2ChoisirDic" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="m2ListDic" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="m2AutoButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="m2ListDic" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="m2TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="m2AddWordButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m2TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m2Mission3Button" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                                  <EmptySpace pref="27" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -403,15 +418,18 @@
                         <Component class="javax.swing.JTextField" name="m2TextField">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                              <Color blue="66" green="66" red="66" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Entrer un mot"/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="m2AutoButton">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="auto remplissage"/>
+                            <Property name="text" type="java.lang.String" value="auto-generation"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m2AutoButtonMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="m2AddWordButton">
                           <Properties>
@@ -419,6 +437,14 @@
                           </Properties>
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m2AddWordButtonMouseClicked"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JButton" name="m2Mission3Button">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="MISSION 3"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m2Mission3ButtonMouseClicked"/>
                           </Events>
                         </Component>
                       </SubComponents>
@@ -438,13 +464,13 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="m3PassField" min="-2" pref="413" max="-2" attributes="0"/>
-                                          <EmptySpace pref="75" max="32767" attributes="0"/>
+                                          <EmptySpace pref="29" max="32767" attributes="0"/>
                                           <Component id="m3ConfirmButton" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="m3FillDicoButton" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="m3AttakButton" min="-2" max="-2" attributes="0"/>
+                                          <Component id="m3AttackButton" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -457,9 +483,9 @@
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="m3FillDicoButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="m3AttakButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m3AttackButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                                  <EmptySpace pref="34" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="m3ConfirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="m3PassField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -474,21 +500,30 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="remplir dictionnaire"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m3FillDicoButtonMouseClicked"/>
+                          </Events>
                         </Component>
-                        <Component class="javax.swing.JButton" name="m3AttakButton">
+                        <Component class="javax.swing.JButton" name="m3AttackButton">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="lancer attaque"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m3AttackButtonMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="m3ConfirmButton">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="confirm pwd"/>
+                            <Property name="text" type="java.lang.String" value="confirmer password"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m3ConfirmButtonMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JTextField" name="m3PassField">
                           <Properties>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                              <Color blue="66" green="66" red="66" type="rgb"/>
                             </Property>
                             <Property name="text" type="java.lang.String" value="Entrer le mot de passe"/>
                           </Properties>
