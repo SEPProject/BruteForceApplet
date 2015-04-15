@@ -38,6 +38,19 @@ public interface ModelBehaviour {
     public void addWordToDict(String word,String dict);
     
     /**
+     * return the dictionnary corresponding to the name in parameter
+     * @param dictName
+     * @return 
+     */
+    public File getDictionnary(String dictName);
+    
+    /**
+     * function that generate words in a dictionnary
+     * @param dictionnary 
+     */
+    public void autoGeneration(String dictionnary);
+    
+    /**
      * clean the model ressources
      */
     public void cleanModel(); 

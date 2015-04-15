@@ -1,19 +1,20 @@
 package controller;
+import model.Model;
 import view.*;
 
-public interface Controller2View {
+public interface ControllerFromView {
 
-    /**
-     * set the view of the controller
-     * @param v
+     /**
+     * set the model of the controller
+     * @param m
      */
-    public void setView(View v);
+    public void setModel(Model m);
 
     /**
-     * return the view of the controller
+     * return the model of the controller
      * @return
      */
-    public View getView();
+    public Model getModel();
     
     /**
      * from view : add the word to the dictionnary
@@ -34,6 +35,11 @@ public interface Controller2View {
      */
     public void performAttack(String dictionnary);
     
+    /**
+     * launch auto generation of words
+     * @param dictionnary 
+     */
+    public void launchAutoGenerator(String dictionnary);
     
     /**
      * what ?

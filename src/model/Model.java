@@ -7,7 +7,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
 import java.nio.channels.FileChannel;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -17,14 +19,14 @@ import java.util.logging.Logger;
  * model : manage the stored data of the application
  */
 public class Model implements ModelBehaviour {
-
+    
     private Controller controller;
-
+    
     /**
      * the file where the password to find is stored
      */
     private File passwordFile;
-
+    
     /**
      * the password manager
      */
@@ -40,30 +42,24 @@ public class Model implements ModelBehaviour {
      */
     private HashMap<String,File> dictMap;
     
-
-    /**
-     * the description of the applet : summary
-     */
-    //private String description;
-
-    public Model(){
-        init();
-    }
-
     /**
      * initialize the model :
      * set the worst password file
      * set the password manager
+     * set the dictionnaries
      */
-    
-    public void init(){
-            System.out.println("## MODEL : init ##");
-            passManager = new PasswordManager();
-            passwordFile = new File("./data/passwordFile");
-            initDictList(); 
+    public Model(Controller ctrl){
+        System.out.println("## MODEL : init ##");
+        this.controller = ctrl;
+        passManager = new PasswordManager();
+        passwordFile = new File("./data/passwordFile");
+        initDictList();
     }
     
-    public void initDictList(){
+    
+    
+    
+    private void initDictList(){
         System.out.println("## MODEL : initDictList ##");
         
         this.dictList = new ArrayList<>();
@@ -75,7 +71,7 @@ public class Model implements ModelBehaviour {
         dictMap.put("testDico",testDico);
         dictMap.put("worstList",worstList);
         dictMap.put("disney",disney);
-              
+        
         for(String s : dictMap.keySet()) {
             if(dictMap.get(s).exists()){
                 File f = new File("./data/"+s);
@@ -86,7 +82,17 @@ public class Model implements ModelBehaviour {
         }
     }
     
-    public void copieFile(File source,File dest){
+    
+    private String pourcentage(int a,int b){
+        double c = new Double(b);
+        double resultat = a/c;
+        double resultatFinal = resultat*100;
+        DecimalFormat df = new DecimalFormat("###.##");
+        return df.format(resultatFinal) + " %";
+    }
+    
+    
+    private void copieFile(File source,File dest){
         FileChannel in = null;
         FileChannel out = null;
         
@@ -117,12 +123,12 @@ public class Model implements ModelBehaviour {
                 }
             }
             
-        }      
+        }
     }
     
     @Override
     public void cleanModel(){
-        System.out.println("## MODEL : cleanModel ##");     
+        System.out.println("## MODEL : cleanModel ##");
         for(String s : dictMap.keySet()){
             dictMap.get(s).delete();
         }
@@ -142,7 +148,7 @@ public class Model implements ModelBehaviour {
     public PasswordManager getPasswordManager(){
         return passManager;
     }
-
+    
     @Override
     public ArrayList<String> getDictList(){
         return this.dictList;
@@ -150,7 +156,7 @@ public class Model implements ModelBehaviour {
     
     @Override
     public void addWordToDict(String word, String dict){
-        System.out.println("## MODEL : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
+        //System.out.println("## MODEL : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
         
         FileWriter fw = null;
         try{
@@ -159,23 +165,79 @@ public class Model implements ModelBehaviour {
             fw.close();
         }catch(IOException e){
             System.err.println(e);
-        }   
+        }
     }
     
+    @Override
     public File getDictionnary(String dictName){
         return dictMap.get(dictName);
     }
     
+    @Override
+    public void autoGeneration(String dictionnary){
+        System.out.println("## CONTROLLER : launchAtutoGenerator ##");
+        
+        int size  = 6;
+        FileWriter fw = null;
+        String charset = "abcdefghijklmnopqrstuvwxyz";
+        
+        StringBuffer word = new StringBuffer();
+        word.setLength(size);
+        
+        try{
+            fw = new FileWriter(dictMap.get(dictionnary),true);
+            
+            int lettre_1 = 21;
+            int lettre_2 = 8;
+            int lettre_3 = 10;
+            int lettre_4;
+        
+            for (lettre_4 = 0; lettre_4<charset.length() ; lettre_4++ ){
+                controller.printToView("generated: "+pourcentage(lettre_4,charset.length()) +" \n","infoStyle");
+                try {
+                    sleep(60);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (int lettre_5 = 0; lettre_5<charset.length() ; lettre_5++ ){
+                    for (int lettre_6 = 0; lettre_6<charset.length() ; lettre_6++ ){
+                        
+                        if(lettre_1 != lettre_2
+                                && lettre_2 != lettre_3
+                                && lettre_3 != lettre_4
+                                && lettre_4 != lettre_5
+                                && lettre_5 != lettre_6)
+                        {
+                            
+                            word.setCharAt(0,charset.charAt(lettre_1));
+                            word.setCharAt(1,charset.charAt(lettre_2));
+                            word.setCharAt(2,charset.charAt(lettre_3));
+                            word.setCharAt(3,charset.charAt(lettre_4));
+                            word.setCharAt(4,charset.charAt(lettre_5));
+                            word.setCharAt(5,charset.charAt(lettre_6));
+                            fw.write(word+ "\n");
+                        }
+                    }
+                }
+            }
+            controller.printToView("generated: "+pourcentage(lettre_4,charset.length())+ " \n","infoStyle");
+            fw.close();
+        }catch(IOException e){
+            System.err.println(e);
+        }
+    }
+    
+    
     /*
     @Override
     public String getDescription(){
-        return description;
+    return description;
     }
-
+    
     @Override
     public void setDescription(String s){
-        description = s;
+    description = s;
     }
-*/
-
+    */
+    
 }

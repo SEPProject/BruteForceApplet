@@ -332,6 +332,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Enter Hash"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m1HashFieldMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -422,6 +425,9 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Entrer un mot"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m2TextFieldMouseClicked"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JButton" name="m2AutoButton">
                           <Properties>
@@ -475,6 +481,11 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="m3FinButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
@@ -485,12 +496,14 @@
                                       <Component id="m3FillDicoButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="m3AttackButton" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="34" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="m3ConfirmButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="m3PassField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="m3ConfirmButton" min="-2" max="-2" attributes="0"/>
+                                      <Component id="m3PassField" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="m3FinButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="14" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -527,6 +540,17 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="Entrer le mot de passe"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m3PassFieldMouseClicked"/>
+                          </Events>
+                        </Component>
+                        <Component class="javax.swing.JToggleButton" name="m3FinButton">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="FIN"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="m3FinButtonMouseClicked"/>
+                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

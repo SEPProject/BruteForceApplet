@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package view;
 
 import MainComponents.Mission;
@@ -18,6 +18,7 @@ import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -28,9 +29,9 @@ import javax.swing.text.StyledDocument;
  * @author seb
  */
 public class View extends javax.swing.JApplet implements ViewBehaviour {
-
+    
     /**
-     * 
+     *
      * Initializes the applet View
      */
     
@@ -38,7 +39,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     
     
     private StyledDocument hackerView, infoView;
-    private Style  errorStyle, succeedStyle, infoStyle, attackStyle, cmdStyle;  
+    private Style  errorStyle, succeedStyle, infoStyle, attackStyle, cmdStyle;
     private boolean firstVisit;
     private String dictionnary;
     
@@ -50,8 +51,8 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Metal".equals(info.getName())) {
@@ -69,7 +70,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             java.util.logging.Logger.getLogger(View.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the applet */
         try {
             java.awt.EventQueue.invokeAndWait(new Runnable() {
@@ -99,10 +100,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                     StyleConstants.setForeground(errorStyle, Color.RED);
                     StyleConstants.setForeground(attackStyle,Color.BLACK);
                     StyleConstants.setForeground(cmdStyle,Color.GRAY);
-                   
-                    //entryPanel.setVisible(true); 
-                    missionLayeredPanel.setVisible(false);                 
-                }               
+                    
+                    //entryPanel.setVisible(true);
+                    missionLayeredPanel.setVisible(false);
+                }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -114,7 +115,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         System.out.println("## VIEW : stop applet ##");
         controller.performCloseApplet();
     }
-
+    
     /**
      * This method is called from within the init() method to initialize the
      * form. WARNING: Do NOT modify this code. The content of this method is
@@ -149,6 +150,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         m3AttackButton = new javax.swing.JButton();
         m3ConfirmButton = new javax.swing.JButton();
         m3PassField = new javax.swing.JTextField();
+        m3FinButton = new javax.swing.JToggleButton();
         viewPanel = new javax.swing.JPanel();
         hackerLabel = new javax.swing.JLabel();
         infoLabel = new javax.swing.JLabel();
@@ -237,6 +239,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
         m1HashField.setForeground(new java.awt.Color(102, 102, 102));
         m1HashField.setText("Enter Hash");
+        m1HashField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m1HashFieldMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout mission1PanelLayout = new javax.swing.GroupLayout(mission1Panel);
         mission1Panel.setLayout(mission1PanelLayout);
@@ -272,6 +279,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
         m2TextField.setForeground(new java.awt.Color(102, 102, 102));
         m2TextField.setText("Entrer un mot");
+        m2TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m2TextFieldMouseClicked(evt);
+            }
+        });
 
         m2AutoButton.setText("auto-generation");
         m2AutoButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -362,6 +374,18 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
 
         m3PassField.setForeground(new java.awt.Color(102, 102, 102));
         m3PassField.setText("Entrer le mot de passe");
+        m3PassField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m3PassFieldMouseClicked(evt);
+            }
+        });
+
+        m3FinButton.setText("FIN");
+        m3FinButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                m3FinButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout mission3PanelLayout = new javax.swing.GroupLayout(mission3Panel);
         mission3Panel.setLayout(mission3PanelLayout);
@@ -379,6 +403,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(m3AttackButton)))
                 .addGap(62, 62, 62))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mission3PanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(m3FinButton)
+                .addGap(319, 319, 319))
         );
         mission3PanelLayout.setVerticalGroup(
             mission3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,11 +415,13 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
                 .addGroup(mission3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(m3FillDicoButton)
                     .addComponent(m3AttackButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(mission3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(mission3PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(m3ConfirmButton)
                     .addComponent(m3PassField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(m3FinButton)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout missionLayeredPanelLayout = new javax.swing.GroupLayout(missionLayeredPanel);
@@ -559,16 +589,28 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             .addComponent(layoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
     public void initMission(){
         System.out.println("## VIEW : initMission ##");
-
+        
         MissionPanel mp = new MissionPanel(300,430,"BruteForce Mission");
         mp.getPannelFrame().setPreferredSize(new java.awt.Dimension(300, 430));
         mp.getPannelFrame().setSize(new java.awt.Dimension(300, 430));
-        Mission mission1 = new Mission("mission 1","description 1");
-        mission1.addSubmission(new Submission(" mission 1 -> sub1","description submission : précise"));
+        
+        Mission mission1 = new Mission("mission 1","Trouver le HASH");
+        mission1.addSubmission(new Submission("indice :","Le hash se situe dans le fichier .password, il faut récupérer le hash intéressant!"));
         mp.addMission(mission1);
+        
+        Mission mission2 = new Mission("mission 2","Construire le dictionnaire");
+        mission2.addSubmission(new Submission("indice 1","Il faut créer un dictionnaire des mots à tester pour éviter de tester toutes les combinaisons possibles."));
+        mission2.addSubmission(new Submission("indice 2","le mot comporte 6 lettre, et vit au nord"));
+        
+        mp.addMission(mission2);
+        
+        Mission mission3 = new Mission("mission 3","L'attaque");
+        mission3.addSubmission(new Submission("indice","Le but est de lancer l'attaque, et de récupérer le mot de passe"));
+        mp.addMission(mission3);
+        
         missionPlacePanel.add(mp.getPannelFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
     }
     
@@ -590,10 +632,10 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         mission3Panel.setVisible(false);
         mission1Panel.setVisible(true);
     }//GEN-LAST:event_entryPanelButtonActionPerformed
-
+    
     @SuppressWarnings("empty-statement")
     private void m1FilebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1FilebuttonMouseClicked
-      
+        
         FileReader fr;
         BufferedReader br ;
         String newLine;
@@ -602,29 +644,29 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
         try{
             fr = new FileReader(controller.getModel().getPasswordFile());
             br = new BufferedReader(fr);
-           
+            
             System.out.println("## view : m1FileButton ... file initialized ##");
             
-            infoView.insertString(infoView.getLength(),"<== Regardez comment les hackers font \n",infoStyle);          
+            infoView.insertString(infoView.getLength(),"<== Regardez comment les hackers font \n",infoStyle);
             hackerView.insertString(hackerView.getLength(),"hacker01~$ cat .password\n\n",cmdStyle);
             while((newLine = br.readLine()) != null){
                 System.out.println("## view : m1FileButton ... reading line ##");
-                hackerView.insertString(hackerView.getLength(),newLine+"\n",attackStyle);            
+                hackerView.insertString(hackerView.getLength(),newLine+"\n",attackStyle);
             }
-           
+            
         }catch(FileNotFoundException e){
             System.err.println(e);
         }catch(BadLocationException exc){
-             System.err.println(exc);
+            System.err.println(exc);
         }catch(IOException ex) {
             System.err.println(ex);
         }
         
     }//GEN-LAST:event_m1FilebuttonMouseClicked
-
+    
     private void m1HashButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1HashButtonMouseClicked
         // TODO add your handling code here:
-       try{
+        try{
             System.out.println("## VIEW : m1HashButton > pressed ##");
             if (controller.getModel().getPasswordManager().testHashUser(m1HashField.getText())){
                 System.out.println("## VIEW : m1FileButton ... good hash ##");
@@ -641,74 +683,143 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
             System.out.println(error);
         }
     }//GEN-LAST:event_m1HashButtonMouseClicked
-
+    
     private void m2AddWordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2AddWordButtonMouseClicked
         // TODO add your handling code here:
         System.out.println("## VIEW : m2AddWordButton > pressed ##");
         controller.performAddWordToDict(m2TextField.getText(),(String) m2ListDic.getSelectedItem());
+        try {
+            infoView.insertString(infoView.getLength(),"Le mot " + m2TextField.getText()+ " ajouté au dictionnaire " +(String) m2ListDic.getSelectedItem() + " \n",infoStyle);
+            hackerView.insertString(hackerView.getLength(),"Les hackers ne font que du remplissage automatique avec des outils\n\n",cmdStyle);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_m2AddWordButtonMouseClicked
-
+    
     private void m2Mission3ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2Mission3ButtonMouseClicked
         // TODO add your handling code here:
         System.out.println("## VIEW : m2Mission3Button > pressed ##");
         try {
             if(firstVisit == true){
+                infoPane.setText("");
                 infoView.insertString(infoView.getLength(),"Lisez la prochaine mission ==> \n",infoStyle);
                 firstVisit = false;
             }
-             dictionnary = (String) m2ListDic.getSelectedItem();
+            dictionnary = (String) m2ListDic.getSelectedItem();
         } catch (BadLocationException ex) {
-             System.err.println(ex);
+            System.err.println(ex);
         }
         mission2Panel.setVisible(false);
-        mission3Panel.setVisible(true);
+        mission3Panel.setVisible(true);      
         hackerPane.setText("");
     }//GEN-LAST:event_m2Mission3ButtonMouseClicked
-
+    
     private void m2AutoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2AutoButtonMouseClicked
         // TODO add your handling code here:
+        try {
+            infoView.insertString(infoView.getLength(),"<== Regarder comment les hackers font pour utiliser l'outil CRUNCH \n",infoStyle);
+            hackerView.insertString(hackerView.getLength(),"hacker01~$ ./crunch 6 6 -f charset.lst lalpha -d 1@ >> " + (String) m2ListDic.getSelectedItem() + " \n",cmdStyle);
+            hackerView.insertString(hackerView.getLength(),"Explication commande : \n"
+                    + "1er chiffre : longueur minimale des mots \n"
+                    + "2eme chiffre : longueur maximale des mots \n"
+                    + "-f charset.lst lalpha : utilisation d'un certain nombre de lettre possible (alphabet en minuscule) \n"
+                    + "-d 1@ : pas deux fois la même lettre côte à côte\n\n",cmdStyle);
+            
+           
+            
+            new Thread(new Runnable() {
+                public void run() {
+                    controller.launchAutoGenerator((String) m2ListDic.getSelectedItem());
+                }
+            }).start();
+            
+            
+        } catch (BadLocationException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_m2AutoButtonMouseClicked
-
+    
     private void m3FillDicoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m3FillDicoButtonMouseClicked
-        // TODO add your handling code here:       
+        // TODO add your handling code here:
         System.out.println("## VIEW : m3FillDicoButton > pressed ##");
         try {
             infoView.insertString(infoView.getLength(),"Entrez de nouveaux mots dans le dictionnaire \n",infoStyle);
         } catch (BadLocationException ex) {
-             System.err.println(ex);
+            System.err.println(ex);
         }
         mission3Panel.setVisible(false);
         mission2Panel.setVisible(true);
         hackerPane.setText("");
     }//GEN-LAST:event_m3FillDicoButtonMouseClicked
-
+    
     private void m3AttackButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m3AttackButtonMouseClicked
         // TODO add your handling code here:
         System.out.println("## VIEW : m3AttackButton > pressed ##");
-        controller.performAttack(dictionnary);
+        try{
+            infoView.insertString(infoView.getLength(),"<== Regarder comment les hackers font pour utiliser l'outil JOHN THE RIPPER \n",infoStyle);
+            infoView.insertString(infoView.getLength(),"D'abord mettre le hash trouvé dans un fichier : hash.txt \n",infoStyle);
+            infoView.insertString(infoView.getLength(),"Ensuite lancer la commande... \n",infoStyle);
+            hackerView.insertString(hackerView.getLength(),"hacker01~$ echo " + controller.getModel().getPasswordManager().getHashStored() + " >> hash.txt \n",cmdStyle);
+            hackerView.insertString(hackerView.getLength(),"hacker01~$ john --format=md5 --wordlist="+(String) m2ListDic.getSelectedItem()+" hash.txt \n",cmdStyle);
+            hackerView.insertString(hackerView.getLength(),"Explication commande : \n"
+                    + "--format : algorithme de hashage utilisé \n"
+                    + "--wordlist : dictionnaire utilisé \n",cmdStyle);
+                    
+            new Thread(new Runnable() {
+                public void run() {
+                    controller.performAttack(dictionnary);
+                }
+            }).start();
+           
+        }catch (BadLocationException ex) {
+            System.err.println(ex);
+        }
     }//GEN-LAST:event_m3AttackButtonMouseClicked
-
+    
     private void m3ConfirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m3ConfirmButtonMouseClicked
         // TODO add your handling code here:
         System.out.println("## VIEW : m3ConfirmButton > pressed ##");
         System.out.println("## VIEW : __ passfield = "+m3PassField.getText()+" __ passwordFound = "+controller.getModel().getPasswordManager().getPasswordFound()+" > pressed ##");
         if(m3PassField.getText().equals(controller.getModel().getPasswordManager().getPasswordFound())){
             try {
-               infoView.insertString(infoView.getLength(),"Bon password\n",succeedStyle);
-               infoView.insertString(infoView.getLength(),"** FIN **\n",infoStyle); 
+                infoView.insertString(infoView.getLength(),"Bon password\n",succeedStyle);
+                infoView.insertString(infoView.getLength(),"** FIN **\n",infoStyle);
             } catch (BadLocationException ex) {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
     }//GEN-LAST:event_m3ConfirmButtonMouseClicked
+       
+    private void m3FinButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m3FinButtonMouseClicked
+        // TODO add your handling code here:
+        this.stop();
+    }//GEN-LAST:event_m3FinButtonMouseClicked
 
-    
-    
-    
-    
-    
+    /* TEXT FIELD EVENT */
+    private void m1HashFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m1HashFieldMouseClicked
+        // TODO add your handling code here:
+         m1HashField.setText("");
+    }//GEN-LAST:event_m1HashFieldMouseClicked
 
+    private void m2TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m2TextFieldMouseClicked
+        // TODO add your handling code here:
+         m2TextField.setText("");
+    }//GEN-LAST:event_m2TextFieldMouseClicked
+
+    private void m3PassFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_m3PassFieldMouseClicked
+        // TODO add your handling code here:
+         m3PassField.setText("");
+    }//GEN-LAST:event_m3PassFieldMouseClicked
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
     private javax.swing.JPanel entryPanel;
@@ -734,6 +845,7 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JButton m3AttackButton;
     private javax.swing.JButton m3ConfirmButton;
     private javax.swing.JButton m3FillDicoButton;
+    private javax.swing.JToggleButton m3FinButton;
     private javax.swing.JTextField m3PassField;
     private javax.swing.JPanel mission1Panel;
     private javax.swing.JPanel mission2Panel;
@@ -744,22 +856,33 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     private javax.swing.JScrollPane scrollInfoPane;
     private javax.swing.JPanel viewPanel;
     // End of variables declaration//GEN-END:variables
-
+    
     
     @Override
     public void setController(Controller c) {
         this.controller=c;
     }
-
+    
     @Override
     public Controller getController() {
         return controller;
     }
     
     @Override
-    public void printMessage(String message){
+    public void printMessage(String message,String style){
         try {
-            infoView.insertString(infoView.getLength(),message,infoStyle);
+            switch(style){
+                case "errorStyle" :
+                    infoView.insertString(infoView.getLength(),message,errorStyle);
+                    break;
+                case "succeedStyle" :
+                    infoView.insertString(infoView.getLength(),message,succeedStyle);
+                    break;
+                default :
+                    infoView.insertString(infoView.getLength(),message,infoStyle);
+                    break;
+            }
+            
         } catch (BadLocationException ex) {
             System.err.println(ex);
         }
@@ -767,11 +890,11 @@ public class View extends javax.swing.JApplet implements ViewBehaviour {
     /*
     @Override
     public void setAppletDescriptionText(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void setMissionDescriptionText(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
 }

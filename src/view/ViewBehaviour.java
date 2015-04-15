@@ -2,6 +2,7 @@ package view;
 
 import controller.*;
 import javax.swing.*;
+import javax.swing.text.Style;
 
 /**
  * view interface
@@ -22,9 +23,10 @@ public interface ViewBehaviour {
     
     /**
      * print a message from controller
-     * @param message 
+     * @param message
+     * @param style 
      */
-    public void printMessage(String message);
+    public void printMessage(String message,String style);
     
     
 
