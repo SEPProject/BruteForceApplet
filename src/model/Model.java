@@ -51,6 +51,7 @@ public class Model implements ModelBehaviour {
     public Model(Controller ctrl){
         System.out.println("## MODEL : init ##");
         this.controller = ctrl;
+        controller.setModel(this);
         passManager = new PasswordManager();
         passwordFile = new File("./data/passwordFile");
         initDictList();

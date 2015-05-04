@@ -16,10 +16,10 @@ public class Controller implements ControllerFromModel, ControllerFromView {
     private Model model;
     private View view;
     
-    public Controller(View v){
-        Model mod = new Model(this);
-        this.model=mod;
-        this.view = v;
+    public Controller(){
+        //Model mod = new Model(this);
+        //this.model=mod;
+        //this.view = v;
     }
     
     
