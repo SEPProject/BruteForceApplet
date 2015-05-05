@@ -44,6 +44,7 @@ public class View extends JFrame implements ViewBehaviour {
     private Style  errorStyle, succeedStyle, infoStyle, attackStyle, cmdStyle;
     private boolean firstVisit;
     private String dictionnary;
+    private MissionPanel mp;
     
     public View(Controller ctrl){
         
@@ -188,7 +189,7 @@ public class View extends JFrame implements ViewBehaviour {
         missionPlacePanel = new javax.swing.JLayeredPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1020, 530));
+        setPreferredSize(new java.awt.Dimension(1020, 470));
         setSize(new java.awt.Dimension(1020, 470));
 
         layoutPanel.setPreferredSize(new java.awt.Dimension(1020, 430));
@@ -625,7 +626,7 @@ public class View extends JFrame implements ViewBehaviour {
     public void initMission(){
         System.out.println("## VIEW : initMission ##");
         
-        MissionPanel mp = new MissionPanel(300,430,"BruteForce Mission");
+        mp = new MissionPanel(300,430,"BruteForce Mission");
         mp.getPannelFrame().setPreferredSize(new java.awt.Dimension(300, 430));
         mp.getPannelFrame().setSize(new java.awt.Dimension(300, 430));
         
@@ -704,6 +705,7 @@ public class View extends JFrame implements ViewBehaviour {
             if (controller.getModel().getPasswordManager().testHashUser(m1HashField.getText())){
                 System.out.println("## VIEW : m1FileButton ... good hash ##");
                 infoView.insertString(infoView.getLength(),"Bon hash\n",succeedStyle);
+                mp.missionDone(1,true);
                 infoView.insertString(infoView.getLength(),"Lisez la prochaine mission ==> \n",infoStyle);
                 mission1Panel.setVisible(false);
                 mission2Panel.setVisible(true);
@@ -722,7 +724,7 @@ public class View extends JFrame implements ViewBehaviour {
         System.out.println("## VIEW : m2AddWordButton > pressed ##");
         controller.performAddWordToDict(m2TextField.getText(),(String) m2ListDic.getSelectedItem());
         try {
-            infoView.insertString(infoView.getLength(),"Le mot " + m2TextField.getText()+ " ajouté au dictionnaire " +(String) m2ListDic.getSelectedItem() + " \n",infoStyle);
+            infoView.insertString(infoView.getLength(),"Le mot " + m2TextField.getText()+ " a été ajouté au dictionnaire " +(String) m2ListDic.getSelectedItem() + " \n",succeedStyle);
             hackerView.insertString(hackerView.getLength(),"Les hackers ne font que du remplissage automatique avec des outils\n\n",cmdStyle);
         } catch (BadLocationException ex) {
             Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
@@ -737,6 +739,7 @@ public class View extends JFrame implements ViewBehaviour {
             if(firstVisit == true){
                 infoPane.setText("");
                 infoView.insertString(infoView.getLength(),"Lisez la prochaine mission ==> \n",infoStyle);
+                mp.missionDone(2, true);
                 firstVisit = false;
             }
             dictionnary = (String) m2ListDic.getSelectedItem();
@@ -817,6 +820,7 @@ public class View extends JFrame implements ViewBehaviour {
         if(m3PassField.getText().equals(controller.getModel().getPasswordManager().getPasswordFound())){
             try {
                 infoView.insertString(infoView.getLength(),"Bon password\n",succeedStyle);
+                mp.missionDone(3, true);
                 infoView.insertString(infoView.getLength(),"** FIN **\n",infoStyle);
             } catch (BadLocationException ex) {
                 Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
