@@ -55,15 +55,4 @@ public interface ModelBehaviour {
      */
     public void cleanModel(); 
    
-    /**
-     * return the description of the applet
-     * @return
-     */
-     //public String getDescription();
-
-    /**
-     * set the description of the applet
-     * @param s
-     */
-    //public void setDescription(String s);
 }

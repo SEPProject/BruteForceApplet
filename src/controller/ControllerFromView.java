@@ -40,12 +40,5 @@ public interface ControllerFromView {
      * @param dictionnary 
      */
     public void launchAutoGenerator(String dictionnary);
-    
-    /**
-     * what ?
-     */
-    //public void initMission1();
-    
-    
-    
+ 
 }

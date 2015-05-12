@@ -4,7 +4,7 @@ public interface PasswordManagerBehaviour {
 
     /**
      * return the hash stored in the passwordManager
-     * @return
+     * @return String
      */
     public String getHashStored();
 
@@ -24,10 +24,11 @@ public interface PasswordManagerBehaviour {
      * @return String
      */
     public String getPasswordFound();
+    
     /**
      * test if the provided hash of the user is wrong or not
      * @param hashProvided
-     * @return boolean
+     * @return boolan
      */
     public boolean testHashUser(String hashProvided);
 }

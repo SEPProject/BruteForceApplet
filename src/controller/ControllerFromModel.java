@@ -23,5 +23,4 @@ public interface ControllerFromModel {
      */
     public void printToView(String message,String style);
 
-
 }

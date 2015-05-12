@@ -25,20 +25,13 @@ public interface ViewBehaviour {
      * print a message from controller
      * @param message
      * @param style 
+     * @param view where you want the message to be printed
      */
-    public void printMessage(String message,String style);
+    public void printMessage(String view, String message,String style);
     
-    
-
     /**
-     * set the applet description on the first page
-     * @param s
+     * set the hackerView to blank
      */
-    //public void setAppletDescriptionText(String s);
+    public void newMessage();
 
-    /**
-     * set the description of the mission
-     * @param s
-     */
-    //public void setMissionDescriptionText(String s);
 }
