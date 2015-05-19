@@ -64,13 +64,11 @@ public class Model implements ModelBehaviour {
         
         this.dictList = new ArrayList<>();
         dictMap = new HashMap<>();
-        File testDico = new File("./data/testDicoInit");
+        File testDico = new File("./data/tonDicoInit");
         File worstList = new File("./data/worstListInit");
-        File disney = new File("./data/disneyInit");
         
-        dictMap.put("testDico",testDico);
+        dictMap.put("tonDico",testDico);
         dictMap.put("worstList",worstList);
-        dictMap.put("disney",disney);
         
         for(String s : dictMap.keySet()) {
             if(dictMap.get(s).exists()){
@@ -156,7 +154,6 @@ public class Model implements ModelBehaviour {
     
     @Override
     public void addWordToDict(String word, String dict){
-        //System.out.println("## MODEL : AddwordToDict __ param word = "+word+" __ param dictionnary = "+dict+" ##");
         
         FileWriter fw = null;
         try{
@@ -226,18 +223,4 @@ public class Model implements ModelBehaviour {
             System.err.println(e);
         }
     }
-    
-    
-    /*
-    @Override
-    public String getDescription(){
-    return description;
-    }
-    
-    @Override
-    public void setDescription(String s){
-    description = s;
-    }
-    */
-    
 }

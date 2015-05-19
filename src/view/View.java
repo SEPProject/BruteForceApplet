@@ -909,6 +909,7 @@ public class View extends JFrame implements ViewBehaviour {
     private void terminatePanelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminatePanelButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("## VIEW : terminateButton > pressed ##");
+        controller.performCloseApplet();
         this.dispose();
     }//GEN-LAST:event_terminatePanelButtonActionPerformed
         
