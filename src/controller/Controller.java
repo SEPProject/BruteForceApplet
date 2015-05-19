@@ -5,11 +5,7 @@ import view.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import javax.swing.SwingUtilities;
 
 public class Controller implements ControllerFromModel, ControllerFromView {
     

@@ -1,6 +1,5 @@
 package controller;
 import model.Model;
-import view.*;
 
 public interface ControllerFromView {
 

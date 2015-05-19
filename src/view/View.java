@@ -16,12 +16,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -126,6 +123,11 @@ public class View extends JFrame implements ViewBehaviour {
         scrollHackPane = new javax.swing.JScrollPane();
         hackerPane = new javax.swing.JTextPane();
         missionPlacePanel = new javax.swing.JLayeredPane();
+        endPanel = new javax.swing.JPanel();
+        lastPanelTitle = new javax.swing.JLabel();
+        lastPanelScrollPanel = new javax.swing.JScrollPane();
+        lastPanelText = new javax.swing.JTextArea();
+        terminatePanelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1220, 570));
@@ -543,6 +545,58 @@ public class View extends JFrame implements ViewBehaviour {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        endPanel.setPreferredSize(new java.awt.Dimension(1220, 570));
+
+        lastPanelTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lastPanelTitle.setText("BILAN ");
+
+        lastPanelScrollPanel.setBackground(new java.awt.Color(238, 238, 238));
+        lastPanelScrollPanel.setBorder(null);
+
+        lastPanelText.setEditable(false);
+        lastPanelText.setBackground(new java.awt.Color(238, 238, 238));
+        lastPanelText.setColumns(20);
+        lastPanelText.setRows(5);
+        lastPanelText.setText("Points qui ont été vus : \n\n- Ce qu'est un fichier password et comment les mots de passe sont enregistrés\n\n- Comment sont conçus les dictionnaires permettant de trouver les mots de passe\n\n- Le déroulement d'une attaque, avec le logiciel \"John the Ripper\" ainsi que son lancement\nen ligne de commande\n\nCe qu'il faut retenir : \n\nil est très difficile de trouver un mot de passe quand aucune information ne peut y être\nassocié\n \nexemple : \n- ce n'est pas un mot existant (nom/prénom/mot du dictionnaire d'une langue)\n- ce n'est pas une date date\n");
+        lastPanelText.setBorder(null);
+        lastPanelScrollPanel.setViewportView(lastPanelText);
+
+        terminatePanelButton.setText("Terminer");
+        terminatePanelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                terminatePanelButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout endPanelLayout = new javax.swing.GroupLayout(endPanel);
+        endPanel.setLayout(endPanelLayout);
+        endPanelLayout.setHorizontalGroup(
+            endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(terminatePanelButton)
+                .addGap(542, 542, 542))
+            .addGroup(endPanelLayout.createSequentialGroup()
+                .addGap(589, 589, 589)
+                .addComponent(lastPanelTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, endPanelLayout.createSequentialGroup()
+                .addContainerGap(328, Short.MAX_VALUE)
+                .addComponent(lastPanelScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(297, 297, 297))
+        );
+        endPanelLayout.setVerticalGroup(
+            endPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(endPanelLayout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addComponent(lastPanelTitle)
+                .addGap(29, 29, 29)
+                .addComponent(lastPanelScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(terminatePanelButton)
+                .addContainerGap(129, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layoutPanelLayout = new javax.swing.GroupLayout(layoutPanel);
         layoutPanel.setLayout(layoutPanelLayout);
         layoutPanelLayout.setHorizontalGroup(
@@ -555,6 +609,11 @@ public class View extends JFrame implements ViewBehaviour {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(fullPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layoutPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layoutPanelLayout.setVerticalGroup(
             layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -564,9 +623,15 @@ public class View extends JFrame implements ViewBehaviour {
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(fullPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layoutPanelLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(endPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layoutPanel.setLayer(entryPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
         layoutPanel.setLayer(fullPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        layoutPanel.setLayer(endPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -588,20 +653,20 @@ public class View extends JFrame implements ViewBehaviour {
         //mp.getPannelFrame().setSize(new java.awt.Dimension(300, 430));
         
         Mission mission1 = new Mission("mission 1","Trouver le HASH");
-        mission1.addSubmission(new Submission("indice :","Le hash se situe dans le fichier .password, il faut"
-                + "\n récupérer le hash intéressant!"));
+        mission1.addSubmission(new Submission("indice :","<html>Le hash se situe dans le fichier .password, il faut"
+                + "<br> récupérer le hash intéressant!<html>"));
         mp.addMission(mission1);
         
         Mission mission2 = new Mission("mission 2","Construire le dictionnaire");
-        mission2.addSubmission(new Submission("indice 1","Il faut créer un dictionnaire des mots à tester pour"
-                + "\n éviter de tester toutes les combinaisons possibles."));
+        mission2.addSubmission(new Submission("indice 1","<html>Il faut créer un dictionnaire des mots à tester pour"
+                + "<br> éviter de tester toutes les combinaisons possibles.<html>"));
         mission2.addSubmission(new Submission("indice 2","le mot comporte 6 lettre, et vit au nord"));
         
         mp.addMission(mission2);
         
         Mission mission3 = new Mission("mission 3","L'attaque");
-        mission3.addSubmission(new Submission("indice","Le but est de lancer l'attaque, et de récupérer le mot"
-                + "\n de passe"));
+        mission3.addSubmission(new Submission("indice","<html>Le but est de lancer l'attaque, et de récupérer le mot"
+                + "<br> de passe<html>"));
         mp.addMission(mission3);
         
         missionPlacePanel.add(mp.getPannelFrame(), javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -805,27 +870,33 @@ public class View extends JFrame implements ViewBehaviour {
     
     private void m3FinButtonMouseClicked(MouseEvent evt) {//GEN-FIRST:event_m3FinButtonMouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        System.out.println("## VIEW : m3FinButtonMouseClicked > pressed ##");
+        fullPanel.setVisible(false);
+        endPanel.setVisible(true);
     }//GEN-LAST:event_m3FinButtonMouseClicked
     
     /* TEXT FIELD EVENT */
     private void m1HashFieldMouseClicked(MouseEvent evt) {//GEN-FIRST:event_m1HashFieldMouseClicked
         // TODO add your handling code here:
+        System.out.println("## VIEW : m1HashFieldMouseClicked > pressed ##");
         m1HashField.setText("");
     }//GEN-LAST:event_m1HashFieldMouseClicked
     
     private void m2TextFieldMouseClicked(MouseEvent evt) {//GEN-FIRST:event_m2TextFieldMouseClicked
         // TODO add your handling code here:
+        System.out.println("## VIEW : m1TextFieldMouseClicked > pressed ##");
         m2TextField.setText("");
     }//GEN-LAST:event_m2TextFieldMouseClicked
     
     private void m3PassFieldMouseClicked(MouseEvent evt) {//GEN-FIRST:event_m3PassFieldMouseClicked
         // TODO add your handling code here:
+        System.out.println("## VIEW : m3PassFieldMouseClicked > pressed ##");
         m3PassField.setText("");
     }//GEN-LAST:event_m3PassFieldMouseClicked
 
     private void m2ListDicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m2ListDicActionPerformed
-        // TODO add your handling code here:`
+        // TODO add your handling code here:
+        System.out.println("## VIEW : m2ListDic > pressed ##");
         if(dictInitialize == true){
             try{
                 infoView.insertString(infoView.getLength(),"Dictionnaire choisi = "+ m2ListDic.getSelectedItem()+"\n", infoStyle);
@@ -834,10 +905,17 @@ public class View extends JFrame implements ViewBehaviour {
             }
         }
     }//GEN-LAST:event_m2ListDicActionPerformed
+
+    private void terminatePanelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminatePanelButtonActionPerformed
+        // TODO add your handling code here:
+        System.out.println("## VIEW : terminateButton > pressed ##");
+        this.dispose();
+    }//GEN-LAST:event_terminatePanelButtonActionPerformed
         
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel controlPanel;
+    private javax.swing.JPanel endPanel;
     private javax.swing.JPanel entryPanel;
     private javax.swing.JButton entryPanelButton;
     private javax.swing.JScrollPane entryPanelScrollPanel;
@@ -848,6 +926,9 @@ public class View extends JFrame implements ViewBehaviour {
     private javax.swing.JTextPane hackerPane;
     private javax.swing.JLabel infoLabel;
     private javax.swing.JTextPane infoPane;
+    private javax.swing.JScrollPane lastPanelScrollPanel;
+    private javax.swing.JTextArea lastPanelText;
+    private javax.swing.JLabel lastPanelTitle;
     private javax.swing.JLayeredPane layoutPanel;
     private javax.swing.JButton m1Filebutton;
     private javax.swing.JButton m1HashButton;
@@ -870,6 +951,7 @@ public class View extends JFrame implements ViewBehaviour {
     private javax.swing.JLayeredPane missionPlacePanel;
     private javax.swing.JScrollPane scrollHackPane;
     private javax.swing.JScrollPane scrollInfoPane;
+    private javax.swing.JButton terminatePanelButton;
     private javax.swing.JPanel viewPanel;
     // End of variables declaration//GEN-END:variables
     

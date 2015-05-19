@@ -1,8 +1,6 @@
 package view;
 
 import controller.*;
-import javax.swing.*;
-import javax.swing.text.Style;
 
 /**
  * view interface
