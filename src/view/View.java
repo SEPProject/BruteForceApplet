@@ -557,7 +557,7 @@ public class View extends JFrame implements ViewBehaviour {
         lastPanelText.setBackground(new java.awt.Color(238, 238, 238));
         lastPanelText.setColumns(20);
         lastPanelText.setRows(5);
-        lastPanelText.setText("Points qui ont été vus : \n\n- Ce qu'est un fichier password et comment les mots de passe sont enregistrés\n\n- Comment sont conçus les dictionnaires permettant de trouver les mots de passe\n\n- Le déroulement d'une attaque, avec le logiciel \"John the Ripper\" ainsi que son lancement\nen ligne de commande\n\nCe qu'il faut retenir : \n\nil est très difficile de trouver un mot de passe quand aucune information ne peut y être\nassocié\n \nexemple : \n- ce n'est pas un mot existant (nom/prénom/mot du dictionnaire d'une langue)\n- ce n'est pas une date date\n");
+        lastPanelText.setText("Points qui ont été vus : \n\n- Ce qu'est un fichier password et comment les mots de passe sont enregistrés\n\n- Comment sont conçus les dictionnaires permettant de trouver les mots de passe\n\n- Le déroulement d'une attaque, avec le logiciel \"John the Ripper\" ainsi que son lancement\nen ligne de commande\n\nCe qu'il faut retenir : \n\nil est très difficile de trouver un mot de passe quand aucune information ne peut y être\nassocié\n \nexemple : \n- ce n'est pas un mot existant (nom/prénom/mot du dictionnaire d'une langue)\n- ce n'est pas une date\n");
         lastPanelText.setBorder(null);
         lastPanelScrollPanel.setViewportView(lastPanelText);
 
