@@ -83,7 +83,7 @@ public class Controller implements ControllerFromModel, ControllerFromView {
                 System.out.println("## CONTROLLER >> attempting :" + attempt + " ##");
                 
                 view.newMessage();
-                view.printMessage("hackerView","                [ CRUNCH ]     \n","attackStyle");
+                view.printMessage("hackerView","                [ JOHN ]     \n","attackStyle");
                 view.printMessage("hackerView","\n","attackerStyle");
                 view.printMessage("hackerView","HASH           : ["+passHashed+"]\n","attackStyle");
                 view.printMessage("hackerView","ATTEMPT        : ["+attempt+"]\n","attackStyle");
@@ -111,9 +111,9 @@ public class Controller implements ControllerFromModel, ControllerFromView {
                 //view.printMessage("infoView","***********************\n\n","infoStyle");
                 view.printMessage("infoView","ECHEC DE LA TENTATIVE \n\n","errorStyle");
                 view.printMessage("hackerView","KEY NOT FOUND !\n","attackStyle");
-                view.printMessage("hackerView","DURATION   : ["+(endTime-startTime)+" sec]\n","attackStyle");
+                view.printMessage("hackerView","DURATION   : ["+(endTime-startTime)+" ms]\n","attackStyle");
                 view.printMessage("hackerView","KEYTESTED  : ["+compteur+"]\n","attackStyle");
-                view.printMessage("hackerView","SPEED      : ["+((long) (compteur)/(endTime-startTime))+" word/sec]\n","attackStyle");
+                view.printMessage("hackerView","SPEED      : ["+((long) (compteur*1000)/(endTime-startTime))+" word/sec]\n","attackStyle");
                 
             }
             br.close();

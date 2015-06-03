@@ -75,8 +75,10 @@ public class View extends JFrame implements ViewBehaviour {
         StyleConstants.setForeground(attackStyle,Color.DARK_GRAY);
         StyleConstants.setForeground(cmdStyle,Color.GRAY);
         
-        //entryPanel.setVisible(true);
-        missionLayeredPanel.setVisible(false);
+        entryPanel.setVisible(true);
+        fullPanel.setVisible(false);
+        endPanel.setVisible(false);
+        
         
     }
     
@@ -686,7 +688,7 @@ public class View extends JFrame implements ViewBehaviour {
         entryPanel.setVisible(false);
         initMission();
         initDictList();
-        missionLayeredPanel.setVisible(true);
+        fullPanel.setVisible(true);
         mission2Panel.setVisible(false);
         mission3Panel.setVisible(false);
         mission1Panel.setVisible(true);
@@ -771,6 +773,7 @@ public class View extends JFrame implements ViewBehaviour {
         try {
             if(mission2FirstVisit == true){
                 infoPane.setText("");
+                hackerPane.setText("");
                 infoView.insertString(infoView.getLength(),"Lisez la prochaine mission ==> \n\n",infoStyle);
                 mp.missionDone(2, true);
                 mission2FirstVisit = false;
@@ -795,7 +798,7 @@ public class View extends JFrame implements ViewBehaviour {
         }
         mission2Panel.setVisible(false);
         mission3Panel.setVisible(true);
-        hackerPane.setText("");
+        
     }//GEN-LAST:event_m2Mission3ButtonMouseClicked
     
     private void m2AutoButtonMouseClicked(MouseEvent evt) {//GEN-FIRST:event_m2AutoButtonMouseClicked
