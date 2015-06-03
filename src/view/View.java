@@ -662,7 +662,7 @@ public class View extends JFrame implements ViewBehaviour {
         Mission mission2 = new Mission("mission 2","Construire le dictionnaire");
         mission2.addSubmission(new Submission("indice 1","<html>Il faut créer un dictionnaire des mots à tester pour"
                 + "<br> éviter de tester toutes les combinaisons possibles.<html>"));
-        mission2.addSubmission(new Submission("indice 2","le mot comporte 6 lettre, et vit au nord"));
+        mission2.addSubmission(new Submission("indice 2","le mot comporte 6 lettres, et vit au nord"));
         
         mp.addMission(mission2);
         
